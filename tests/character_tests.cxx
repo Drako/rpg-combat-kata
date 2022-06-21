@@ -28,3 +28,11 @@ TEST_F(CharacterTests, characterDiesIfTakingTooMuchDamage)
   character.takeDamage(character.health());
   EXPECT_FALSE(character.alive());
 }
+
+TEST_F(CharacterTests, charactersCanBeHealed)
+{
+  int oldHealth = character.health();
+  character.takeDamage(42);
+  character.restore(23);
+  EXPECT_EQ(oldHealth - 19, character.health());
+}
