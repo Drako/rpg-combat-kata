@@ -13,6 +13,8 @@ void Combat::attack(const rpg::Character &attacker, rpg::Character &target, int 
     int const levelDifference = attacker.level() - target.level();
     if (levelDifference >= LEVEL_THRESHOLD)
       target.takeDamage(damage + (damage >> 1U));
+    else if (levelDifference <= -LEVEL_THRESHOLD)
+      target.takeDamage(damage >> 1U);
     else
       target.takeDamage(damage);
   }

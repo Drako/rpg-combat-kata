@@ -63,5 +63,5 @@ TEST(CombatTests, charactersTake50PercentLessDamageFromWeakEnemies)
   int const oldHealth = strong.health();
 
   rpg::Combat::attack(weak, strong, 10);
-  EXPECT_EQ(oldHealth - 5, weak.health());
+  EXPECT_EQ(oldHealth - 5, strong.health());
 }
