@@ -36,3 +36,10 @@ TEST_F(HealthTests, healthCannotFallBelow0)
   health -= (FULL_HEALTH + 10);
   EXPECT_EQ(0, health);
 }
+
+TEST_F(HealthTests, healthCanBeRestored)
+{
+  health -= 50;
+  health += 25;
+  EXPECT_EQ(FULL_HEALTH - 25, health);
+}
