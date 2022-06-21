@@ -9,6 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(rpgCombatKata STATIC
     src/health.hxx src/health.cxx
     )
+target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
 
 include(FetchContent)
 FetchContent_Declare(
