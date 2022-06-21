@@ -43,3 +43,12 @@ TEST_F(HealthTests, healthCanBeRestored)
   health += 25;
   EXPECT_EQ(FULL_HEALTH - 25, health);
 }
+
+TEST_F(HealthTests, healthRestorationByNegativeValueThrowsException)
+{
+  auto const restoreHealthByNegativeValue = [this]
+  {
+    health += (-10);
+  };
+  EXPECT_THROW(restoreHealthByNegativeValue(), std::invalid_argument);
+}
