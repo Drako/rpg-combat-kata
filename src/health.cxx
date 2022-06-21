@@ -18,4 +18,10 @@ Health &Health::operator-=(int const damage)
   value -= std::min(value, damage);
   return *this;
 }
+
+Health &Health::operator+=(int const restoration)
+{
+  value += restoration;
+  return *this;
+}
 }

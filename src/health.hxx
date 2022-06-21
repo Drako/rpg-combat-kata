@@ -9,6 +9,8 @@ class Health final
 public:
   Health &operator-=(int damage);
 
+  Health &operator+=(int restoration);
+
   operator int() const noexcept;
 
 private:
