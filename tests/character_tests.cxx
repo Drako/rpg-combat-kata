@@ -6,6 +6,11 @@
 struct CharacterTests: testing::Test
 {
   rpg::Character character{};
+
+  static void kill(rpg::Character &c)
+  {
+    c.takeDamage(c.health());
+  }
 };
 
 TEST_F(CharacterTests, characterStartsAliveWithFullHealthAtLevel1)
@@ -25,7 +30,7 @@ TEST_F(CharacterTests, charactersCanTakeDamage)
 
 TEST_F(CharacterTests, characterDiesIfTakingTooMuchDamage)
 {
-  character.takeDamage(character.health());
+  kill(character);
   EXPECT_FALSE(character.alive());
 }
 
@@ -39,7 +44,7 @@ TEST_F(CharacterTests, charactersCanBeHealed)
 
 TEST_F(CharacterTests, deadCharactersCannotBeHealed)
 {
-  character.takeDamage(character.health());
+  kill(character);
   character.restore(23);
   EXPECT_EQ(0, character.health());
   EXPECT_FALSE(character.alive());
