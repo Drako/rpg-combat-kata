@@ -2,11 +2,6 @@
 
 #include "health.hxx"
 
-TEST(HealthTests, canInstantiateHealth)
-{
-  rpg::Health health;
-}
-
 TEST(HealthTest, healthStartsAt1000)
 {
   rpg::Health health;
