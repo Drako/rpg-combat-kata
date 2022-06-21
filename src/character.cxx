@@ -23,4 +23,9 @@ void Character::takeDamage(int const damage)
   if (_health == 0)
     _alive = false;
 }
+
+void Character::restore(int restoration)
+{
+  _health += restoration;
+}
 }

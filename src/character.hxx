@@ -15,6 +15,8 @@ public:
 
   void takeDamage(int damage);
 
+  void restore(int restoration);
+
 private:
   Health _health{};
   int _level{1};
