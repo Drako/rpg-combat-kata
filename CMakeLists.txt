@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(rpgCombatKata STATIC
     src/character.hxx src/character.cxx
+    src/combat.hxx src/combat.cxx
     src/health.hxx src/health.cxx
     )
 target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
@@ -25,6 +26,7 @@ enable_testing()
 
 add_executable(rpgCombatKataTests
     tests/character_tests.cxx
+    tests/combat_tests.cxx
     tests/health_tests.cxx)
 target_link_libraries(rpgCombatKataTests PRIVATE rpgCombatKata gtest gmock gmock_main)
 add_test(NAME rpgCombatKataTests COMMAND rpgCombatKataTests)
