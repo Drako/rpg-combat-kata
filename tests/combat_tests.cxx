@@ -54,3 +54,14 @@ TEST(CombatTests, charactersTake50PercentMoreDamageFromStrongEnemies)
   rpg::Combat::attack(strong, weak, 10);
   EXPECT_EQ(oldHealth - 15, weak.health());
 }
+
+TEST(CombatTests, charactersTake50PercentLessDamageFromWeakEnemies)
+{
+  rpg::Character weak{};
+  rpg::Character strong{};
+  ::setLevel(strong, 1 + LEVEL_THRESHOLD);
+  int const oldHealth = strong.health();
+
+  rpg::Combat::attack(weak, strong, 10);
+  EXPECT_EQ(oldHealth - 5, weak.health());
+}
