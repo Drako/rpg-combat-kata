@@ -4,15 +4,17 @@
 
 static int constexpr FULL_HEALTH = 1000;
 
-TEST(HealthTests, healthStartsAt1000)
-{
+struct HealthTests : testing::Test {
   rpg::Health health;
+};
+
+TEST_F(HealthTests, healthStartsAt1000)
+{
   EXPECT_EQ(FULL_HEALTH, health);
 }
 
-TEST(HealthTests, healthCanBeReduced)
+TEST_F(HealthTests, healthCanBeReduced)
 {
-  rpg::Health health;
   health -= 10;
   EXPECT_EQ(FULL_HEALTH - 10, health);
 }
