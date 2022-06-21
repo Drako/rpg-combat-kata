@@ -10,8 +10,15 @@ struct CharacterTests: testing::Test
 
 TEST_F(CharacterTests, characterStartsAliveWithFullHealthAtLevel1)
 {
-  int const fullHealth = static_cast<int>(rpg::Health{});
+  int const fullHealth = rpg::Health{};
   EXPECT_EQ(fullHealth, character.health());
   EXPECT_EQ(1, character.level());
   EXPECT_TRUE(character.alive());
+}
+
+TEST_F(CharacterTests, charactersCanTakeDamage)
+{
+  int const oldHealth = character.health();
+  character.takeDamage(42);
+  EXPECT_EQ(oldHealth - 42, character.health());
 }
