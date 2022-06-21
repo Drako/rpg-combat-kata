@@ -52,3 +52,9 @@ TEST_F(HealthTests, healthRestorationByNegativeValueThrowsException)
   };
   EXPECT_THROW(restoreHealthByNegativeValue(), std::invalid_argument);
 }
+
+TEST_F(HealthTests, healthCannotBeRaisedOver1000)
+{
+  health += 10;
+  EXPECT_EQ(FULL_HEALTH, health);
+}
