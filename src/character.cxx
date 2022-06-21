@@ -16,4 +16,9 @@ bool Character::alive() const noexcept
 {
   return _alive;
 }
+
+void Character::takeDamage(int const damage)
+{
+  _health -= damage;
+}
 }

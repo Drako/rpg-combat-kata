@@ -13,6 +13,8 @@ public:
 
   [[nodiscard]] bool alive() const noexcept;
 
+  void takeDamage(int damage);
+
 private:
   Health _health{};
   int _level{1};
