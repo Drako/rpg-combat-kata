@@ -6,7 +6,8 @@
 
 static int constexpr FULL_HEALTH = 1000;
 
-struct HealthTests : testing::Test {
+struct HealthTests: testing::Test
+{
   rpg::Health health;
 };
 
@@ -23,8 +24,15 @@ TEST_F(HealthTests, healthCanBeReduced)
 
 TEST_F(HealthTests, healthReductionByNegativeValueThrowsException)
 {
-  auto const reduceHealthByNegativeValue = [this]{
+  auto const reduceHealthByNegativeValue = [this]
+  {
     health -= (-10);
   };
   EXPECT_THROW(reduceHealthByNegativeValue(), std::invalid_argument);
+}
+
+TEST_F(HealthTests, healthCannotFallBelow0)
+{
+  health -= (FULL_HEALTH + 10);
+  EXPECT_EQ(0, health);
 }
