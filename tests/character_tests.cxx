@@ -36,3 +36,11 @@ TEST_F(CharacterTests, charactersCanBeHealed)
   character.restore(23);
   EXPECT_EQ(oldHealth - 19, character.health());
 }
+
+TEST_F(CharacterTests, deadCharactersCannotBeHealed)
+{
+  character.takeDamage(character.health());
+  character.restore(23);
+  EXPECT_EQ(0, character.health());
+  EXPECT_FALSE(character.alive());
+}
