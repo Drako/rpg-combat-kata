@@ -8,7 +8,7 @@ static int constexpr FULL_HEALTH = 1000;
 
 struct HealthTests: testing::Test
 {
-  rpg::Health health;
+  rpg::Health health{};
 };
 
 TEST_F(HealthTests, healthStartsAt1000)

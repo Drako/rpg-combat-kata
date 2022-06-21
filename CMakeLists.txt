@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED  ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(rpgCombatKata STATIC
+    src/character.hxx src/character.cxx
     src/health.hxx src/health.cxx
     )
 target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
@@ -23,6 +24,7 @@ FetchContent_MakeAvailable(GoogleTest)
 enable_testing()
 
 add_executable(rpgCombatKataTests
+    tests/character_tests.cxx
     tests/health_tests.cxx)
 target_link_libraries(rpgCombatKataTests PRIVATE rpgCombatKata gtest gmock gmock_main)
 add_test(NAME rpgCombatKataTests COMMAND rpgCombatKataTests)
