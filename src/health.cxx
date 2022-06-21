@@ -21,6 +21,10 @@ Health &Health::operator-=(int const damage)
 
 Health &Health::operator+=(int const restoration)
 {
+  if (restoration < 0) {
+    throw std::invalid_argument{"restoration must not be negative"};
+  }
+
   value += restoration;
   return *this;
 }
