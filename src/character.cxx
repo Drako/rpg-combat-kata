@@ -1,0 +1,19 @@
+#include "character.hxx"
+
+namespace rpg
+{
+Health Character::health() const noexcept
+{
+  return _health;
+}
+
+int Character::level() const noexcept
+{
+  return _level;
+}
+
+bool Character::alive() const noexcept
+{
+  return _alive;
+}
+}
