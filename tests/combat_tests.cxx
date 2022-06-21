@@ -21,3 +21,12 @@ TEST(CombatTests, charactersCannotAttackThemselves)
   rpg::Combat::attack(bob, bob, 10);
   EXPECT_EQ(oldHealth, bob.health());
 }
+
+TEST(CombatTests, charactersCanHealThemselves)
+{
+  rpg::Character heinz{};
+  int const oldHealth = heinz.health();
+  heinz.takeDamage(250);
+  rpg::Combat::heal(heinz, 100);
+  EXPECT_EQ(oldHealth - 150, heinz.health());
+}
