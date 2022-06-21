@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace rpg {
+namespace rpg
+{
 Health::operator int() const noexcept
 {
   return value;
@@ -25,7 +26,7 @@ Health &Health::operator+=(int const restoration)
     throw std::invalid_argument{"restoration must not be negative"};
   }
 
-  value += restoration;
+  value += std::min(FULL_HEALTH - value, restoration);
   return *this;
 }
 }
