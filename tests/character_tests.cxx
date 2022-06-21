@@ -22,3 +22,9 @@ TEST_F(CharacterTests, charactersCanTakeDamage)
   character.takeDamage(42);
   EXPECT_EQ(oldHealth - 42, character.health());
 }
+
+TEST_F(CharacterTests, characterDiesIfTakingTooMuchDamage)
+{
+  character.takeDamage(character.health());
+  EXPECT_FALSE(character.alive());
+}
