@@ -2,6 +2,11 @@
 
 namespace rpg
 {
+Character::Character(CharacterType const type) noexcept
+  : _type{type}
+{
+}
+
 Health Character::health() const noexcept
 {
   return _health;
