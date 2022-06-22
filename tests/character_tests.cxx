@@ -2,7 +2,6 @@
 
 #include "character.hxx"
 #include "health.hxx"
-#include "position.hxx"
 
 #include <sstream>
 #include <type_traits>

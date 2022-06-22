@@ -1,5 +1,4 @@
 #include "character.hxx"
-#include "position.hxx"
 
 namespace rpg
 {
@@ -16,12 +15,12 @@ std::ostream &operator<<(std::ostream &os, CharacterType const type) noexcept
 }
 
 Character::Character(CharacterType const type) noexcept
-  : _type{type}
+  : Character{Position{}, type}
 {
 }
 
 Character::Character(Position const &position, CharacterType const type) noexcept
-  : Character{type}
+  : _type{type}, _position{position}
 {
 }
 
@@ -76,6 +75,6 @@ float Character::range() const noexcept
 
 Position Character::position() const noexcept
 {
-  return Position{};
+  return _position;
 }
 }

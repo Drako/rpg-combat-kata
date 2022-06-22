@@ -1,6 +1,7 @@
 #pragma once
 
 #include "health.hxx"
+#include "position.hxx"
 
 #include <ostream>
 
@@ -13,8 +14,6 @@ enum class CharacterType
 };
 
 std::ostream &operator<<(std::ostream &os, CharacterType type) noexcept;
-
-struct Position;
 
 class Character final
 {
@@ -51,5 +50,6 @@ private:
   int _level{1};
   bool _alive{true};
   CharacterType _type;
+  Position _position;
 };
 }
