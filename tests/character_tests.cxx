@@ -68,7 +68,7 @@ TEST_F(CharacterTests, characterDiesIfTakingTooMuchDamage)
 
 TEST_F(CharacterTests, charactersCanBeHealed)
 {
-  int oldHealth = character.health();
+  int const oldHealth = character.health();
   character.takeDamage(42);
   character.restore(23);
   EXPECT_EQ(oldHealth - 19, character.health());
@@ -90,11 +90,11 @@ TEST_F(CharacterTests, charactersAreMeleeByDefault)
 
 TEST_F(CharacterTests, charactersCanBeCreatedWithExplicitType)
 {
-  rpg::Character fighter{rpg::CharacterType::Melee};
+  rpg::Character const fighter{rpg::CharacterType::Melee};
   EXPECT_EQ(rpg::CharacterType::Melee, fighter.type());
   EXPECT_FLOAT_EQ(2.f, fighter.range());
 
-  rpg::Character ranger{rpg::CharacterType::Ranged};
+  rpg::Character const ranger{rpg::CharacterType::Ranged};
   EXPECT_EQ(rpg::CharacterType::Ranged, ranger.type());
   EXPECT_FLOAT_EQ(20.f, ranger.range());
 }
