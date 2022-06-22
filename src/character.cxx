@@ -77,4 +77,9 @@ Position Character::position() const noexcept
 {
   return _position;
 }
+
+void Character::moveTo(Position const &newPosition) noexcept
+{
+  _position = newPosition;
+}
 }

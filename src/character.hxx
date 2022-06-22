@@ -45,6 +45,8 @@ public:
 
   void levelUp() noexcept;
 
+  void moveTo(Position const& newPosition) noexcept;
+
 private:
   Health _health{};
   int _level{1};
