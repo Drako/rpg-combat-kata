@@ -14,6 +14,8 @@ enum class CharacterType
 
 std::ostream &operator<<(std::ostream &os, CharacterType type) noexcept;
 
+struct Position;
+
 class Character final
 {
   static float constexpr MELEE_RANGE = 2.f;
@@ -34,6 +36,8 @@ public:
   [[nodiscard]] CharacterType type() const noexcept;
 
   [[nodiscard]] float range() const noexcept;
+
+  [[nodiscard]] Position position() const noexcept;
 
   void takeDamage(int damage);
 

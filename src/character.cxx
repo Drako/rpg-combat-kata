@@ -1,4 +1,5 @@
 #include "character.hxx"
+#include "position.hxx"
 
 namespace rpg
 {
@@ -66,5 +67,10 @@ float Character::range() const noexcept
   case CharacterType::Ranged:
     return RANGED_RANGE;
   }
+}
+
+Position Character::position() const noexcept
+{
+  return Position{};
 }
 }
