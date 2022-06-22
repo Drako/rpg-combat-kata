@@ -124,3 +124,11 @@ INSTANTIATE_TEST_SUITE_P(StartingPosition, CharacterStartingPositionTests, testi
   rpg::Position{0.f, 1.f},
   rpg::Position{0.f, -1.f}
 ));
+
+TEST_F(CharacterTests, charactersShouldBeAbleToMove)
+{
+  character.moveTo({23.f, 42.f});
+  auto const position = character.position();
+  EXPECT_FLOAT_EQ(23.f, position.x);
+  EXPECT_FLOAT_EQ(42.f, position.y);
+}
