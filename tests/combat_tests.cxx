@@ -56,6 +56,20 @@ TEST(CombatTests, charactersCanHealThemselves)
   EXPECT_EQ(oldHealth - 150, heinz.health());
 }
 
+TEST(CombatTests, charactersCanHealAllies)
+{
+  rpg::Character jessy{};
+  jessy.join("Team Rocket");
+
+  rpg::Character james{};
+  james.join("Team Rocket");
+
+  int const oldHealth = james.health();
+  james.takeDamage(250);
+  rpg::Combat::heal(jessy, james, 100);
+  EXPECT_EQ(oldHealth - 150, james.health());
+}
+
 TEST(CombatTests, charactersTake50PercentMoreDamageFromStrongEnemies)
 {
   rpg::Character strong{};
