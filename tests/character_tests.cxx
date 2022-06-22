@@ -132,3 +132,8 @@ TEST_F(CharacterTests, charactersShouldBeAbleToMove)
   EXPECT_FLOAT_EQ(23.f, position.x);
   EXPECT_FLOAT_EQ(42.f, position.y);
 }
+
+TEST_F(CharacterTests, charactersBelongToNoFactionsByDefault)
+{
+  EXPECT_TRUE(character.factions().empty());
+}
