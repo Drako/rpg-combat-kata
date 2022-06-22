@@ -1,11 +1,13 @@
 #pragma once
 
+#include "cxx_17_traits.hxx"
 #include "health.hxx"
 #include "position.hxx"
 
 #include <ostream>
 #include <string>
 #include <unordered_set>
+#include <utility>
 
 namespace rpg
 {
@@ -41,7 +43,7 @@ public:
 
   [[nodiscard]] Position position() const noexcept;
 
-  [[nodiscard]] std::unordered_set<std::string> const& factions() const noexcept;
+  [[nodiscard]] std::unordered_set<std::string> const &factions() const noexcept;
 
   void takeDamage(int damage);
 
@@ -49,7 +51,25 @@ public:
 
   void levelUp() noexcept;
 
-  void moveTo(Position const& newPosition) noexcept;
+  void moveTo(Position const &newPosition) noexcept;
+
+  template<typename... StringTypes>
+  auto join(StringTypes &&... factions)
+  -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
+  {
+    auto const f = {std::string{std::forward<StringTypes>(factions)}...};
+    for (auto const &faction: f)
+      _factions.insert(faction);
+  }
+
+  template<typename... StringTypes>
+  auto leave(StringTypes &&... factions)
+  -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
+  {
+    auto const f = {std::string{std::forward<StringTypes>(factions)}...};
+    for (auto const &faction: f)
+      _factions.erase(faction);
+  }
 
 private:
   Health _health{};

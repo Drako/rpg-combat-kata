@@ -11,6 +11,7 @@ add_library(rpgCombatKata STATIC
     src/combat.hxx src/combat.cxx
     src/health.hxx src/health.cxx
     src/position.hxx
+    src/cxx_17_traits.hxx
     )
 target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
 
