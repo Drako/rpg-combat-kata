@@ -3,6 +3,37 @@
 #include "character.hxx"
 #include "health.hxx"
 
+#include <sstream>
+#include <type_traits>
+
+struct CharacterTypeOutputParams final
+{
+  rpg::CharacterType type;
+  std::string expected;
+};
+
+std::ostream &operator<<(std::ostream &os, CharacterTypeOutputParams const &params)
+{
+  return os << "{ type: " << static_cast<std::underlying_type_t<rpg::CharacterType>>(params.type) << ", expected: \""
+            << params.expected << "\"}";
+}
+
+using CharacterTypeTests = testing::TestWithParam<CharacterTypeOutputParams>;
+
+TEST_P(CharacterTypeTests, streamingOperatorShouldYieldExpectedOutput)
+{
+  auto const param = GetParam();
+  std::ostringstream stream;
+  stream << param.type;
+  EXPECT_EQ(param.expected, stream.str());
+}
+
+INSTANTIATE_TEST_SUITE_P(Output, CharacterTypeTests, testing::Values(
+  CharacterTypeOutputParams{rpg::CharacterType::Melee, "CharacterType::Melee"},
+  CharacterTypeOutputParams{rpg::CharacterType::Ranged, "CharacterType::Ranged"},
+  CharacterTypeOutputParams{static_cast<rpg::CharacterType>(42), "CharacterType::[Invalid]"}
+));
+
 struct CharacterTests: testing::Test
 {
   rpg::Character character{};

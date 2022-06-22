@@ -2,6 +2,8 @@
 
 #include "health.hxx"
 
+#include <ostream>
+
 namespace rpg
 {
 enum class CharacterType
@@ -9,6 +11,8 @@ enum class CharacterType
   Melee,
   Ranged,
 };
+
+std::ostream &operator<<(std::ostream &os, CharacterType type) noexcept;
 
 class Character final
 {

@@ -2,6 +2,18 @@
 
 namespace rpg
 {
+std::ostream &operator<<(std::ostream &os, CharacterType const type) noexcept
+{
+  switch (type) {
+  case CharacterType::Melee:
+    return os << "CharacterType::Melee";
+  case CharacterType::Ranged:
+    return os << "CharacterType::Ranged";
+  default:
+    return os << "CharacterType::[Invalid]";
+  }
+}
+
 Character::Character(CharacterType const type) noexcept
   : _type{type}
 {
