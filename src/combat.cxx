@@ -41,4 +41,9 @@ void Combat::heal(Character &healer, int const restoration)
 {
   healer.restore(restoration);
 }
+
+bool Combat::areAllies(Character const &a, Character const &b) noexcept
+{
+  return false;
+}
 }
