@@ -24,10 +24,9 @@ namespace rpg
 {
 void Combat::attack(const rpg::Character &attacker, rpg::Character &target, int const damage)
 {
-  if (std::addressof(target) == std::addressof(attacker))
-    return;
+  bool const attackingSelf = std::addressof(target) == std::addressof(attacker);
 
-  if (::distanceBetween(attacker, target) > attacker.range())
+  if (attackingSelf || ::distanceBetween(attacker, target) > attacker.range())
     return;
 
   int const levelDifference = attacker.level() - target.level();
