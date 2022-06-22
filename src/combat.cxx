@@ -1,7 +1,9 @@
 #include "combat.hxx"
 #include "character.hxx"
 
+#include <algorithm>
 #include <cmath>
+#include <iterator>
 #include <utility>
 
 static int constexpr LEVEL_THRESHOLD = 5;
@@ -44,6 +46,11 @@ void Combat::heal(Character &healer, int const restoration)
 
 bool Combat::areAllies(Character const &a, Character const &b) noexcept
 {
-  return false;
+  auto const &aFactions = a.factions();
+  auto const &bFactions = b.factions();
+  return std::any_of(std::cbegin(aFactions), std::cend(aFactions), [&bFactions](std::string const &faction)
+  {
+    return bFactions.count(faction) == 1U;
+  });
 }
 }
