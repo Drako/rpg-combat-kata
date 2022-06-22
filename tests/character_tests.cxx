@@ -137,3 +137,21 @@ TEST_F(CharacterTests, charactersBelongToNoFactionsByDefault)
 {
   EXPECT_TRUE(character.factions().empty());
 }
+
+TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
+{
+  character.join("A-Team");
+  std::unordered_set<std::string> const onlyATeam{"A-Team"};
+  EXPECT_EQ(onlyATeam, character.factions());
+
+  character.join("Mystery Inc.", "Ghostbusters");
+  std::unordered_set<std::string> const all{"A-Team", "Mystery Inc.", "Ghostbusters"};
+  EXPECT_EQ(all, character.factions());
+
+  character.leave("A-Team", "Ghostbusters");
+  std::unordered_set<std::string> const onlyMysteryInc{"Mystery Inc."};
+  EXPECT_EQ(onlyMysteryInc, character.factions());
+
+  character.leave("Mystery Inc.");
+  EXPECT_TRUE(character.factions().empty());
+}
