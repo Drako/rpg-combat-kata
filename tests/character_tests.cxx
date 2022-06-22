@@ -97,3 +97,10 @@ TEST_F(CharacterTests, charactersCanBeCreatedWithExplicitType)
   EXPECT_EQ(rpg::CharacterType::Ranged, ranger.type());
   EXPECT_FLOAT_EQ(20.f, ranger.range());
 }
+
+TEST_F(CharacterTests, charactersStartAtCenterOfWorldByDefault)
+{
+  auto const position = character.position();
+  EXPECT_FLOAT_EQ(0.f, position.x);
+  EXPECT_FLOAT_EQ(0.f, position.y);
+}
