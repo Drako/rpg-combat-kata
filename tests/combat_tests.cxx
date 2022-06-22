@@ -106,3 +106,13 @@ INSTANTIATE_TEST_SUITE_P(Range, CombatRangeTests, testing::Values(
   CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 10.f}, true},
   CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 20.f}, false}
 ));
+
+TEST(CombatTests, charactersWithNoCommonFactionsAreNoAllies)
+{
+  rpg::Character jessy{};
+  jessy.join("Team Rocket");
+
+  rpg::Character ash{};
+
+  EXPECT_FALSE(rpg::Combat::areAllies(jessy, ash));
+}
