@@ -39,9 +39,10 @@ void Combat::attack(const rpg::Character &attacker, rpg::Character &target, int 
     target.takeDamage(damage);
 }
 
-void Combat::heal(Character &healer, int const restoration)
+void Combat::heal(Character const &healer, rpg::Character &target, int const restoration)
 {
-  healer.restore(restoration);
+  (void) healer;
+  target.restore(restoration);
 }
 
 bool Combat::areAllies(Character const &a, Character const &b) noexcept

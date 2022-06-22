@@ -38,7 +38,7 @@ TEST(CombatTests, charactersCanHealThemselves)
   rpg::Character heinz{};
   int const oldHealth = heinz.health();
   heinz.takeDamage(250);
-  rpg::Combat::heal(heinz, 100);
+  rpg::Combat::heal(heinz, heinz, 100);
   EXPECT_EQ(oldHealth - 150, heinz.health());
 }
 
