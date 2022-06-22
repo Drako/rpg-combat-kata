@@ -4,6 +4,8 @@
 #include "position.hxx"
 
 #include <ostream>
+#include <string>
+#include <unordered_set>
 
 namespace rpg
 {
@@ -39,6 +41,8 @@ public:
 
   [[nodiscard]] Position position() const noexcept;
 
+  [[nodiscard]] std::unordered_set<std::string> const& factions() const noexcept;
+
   void takeDamage(int damage);
 
   void restore(int restoration);
@@ -53,5 +57,6 @@ private:
   bool _alive{true};
   CharacterType _type;
   Position _position;
+  std::unordered_set<std::string> _factions{};
 };
 }

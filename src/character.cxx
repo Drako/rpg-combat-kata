@@ -82,4 +82,9 @@ void Character::moveTo(Position const &newPosition) noexcept
 {
   _position = newPosition;
 }
+
+std::unordered_set<std::string> const &Character::factions() const noexcept
+{
+  return _factions;
+}
 }
