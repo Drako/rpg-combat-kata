@@ -8,3 +8,7 @@
 
 # CMake
 /*build*/
+
+# Visual Studio
+/out/
+/.vs/
