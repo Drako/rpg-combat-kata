@@ -49,3 +49,9 @@ TEST_F(CharacterTests, deadCharactersCannotBeHealed)
   EXPECT_EQ(0, character.health());
   EXPECT_FALSE(character.alive());
 }
+
+TEST_F(CharacterTests, charactersAreMeleeByDefault)
+{
+  EXPECT_EQ(CharacterType::Melee, character.type());
+  EXPECT_FLOAT_EQ(2.f, character.range());
+}
