@@ -105,3 +105,23 @@ TEST_F(CharacterTests, charactersStartAtCenterOfWorldByDefault)
   EXPECT_FLOAT_EQ(0.f, position.x);
   EXPECT_FLOAT_EQ(0.f, position.y);
 }
+
+struct CharacterStartingPositionTests: CharacterTests, testing::WithParamInterface<rpg::Position>
+{
+};
+
+TEST_P(CharacterStartingPositionTests, charactersCanStartAtDifferentPosition)
+{
+  auto const expected = GetParam();
+  rpg::Character const bob{expected};
+  auto const position = bob.position();
+  EXPECT_FLOAT_EQ(expected.x, position.x);
+  EXPECT_FLOAT_EQ(expected.y, position.y);
+}
+
+INSTANTIATE_TEST_SUITE_P(StartingPosition, CharacterStartingPositionTests, testing::Values(
+  rpg::Position{1.f, 0.f},
+  rpg::Position{-1.f, 0.f},
+  rpg::Position{0.f, 1.f},
+  rpg::Position{0.f, -1.f}
+));

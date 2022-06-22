@@ -23,6 +23,7 @@ class Character final
 
 public:
   explicit Character(CharacterType type = CharacterType::Melee) noexcept;
+  explicit Character(Position const &position, CharacterType type = CharacterType::Melee) noexcept;
 
   Character(Character const &) noexcept = default;
   Character &operator=(Character const &) noexcept = default;

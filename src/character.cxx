@@ -20,6 +20,11 @@ Character::Character(CharacterType const type) noexcept
 {
 }
 
+Character::Character(Position const &position, CharacterType const type) noexcept
+  : Character{type}
+{
+}
+
 Health Character::health() const noexcept
 {
   return _health;
