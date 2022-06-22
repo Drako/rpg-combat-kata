@@ -29,4 +29,9 @@ void Character::restore(int restoration)
   if (_alive)
     _health += restoration;
 }
+
+void Character::levelUp() noexcept
+{
+  ++_level;
+}
 }

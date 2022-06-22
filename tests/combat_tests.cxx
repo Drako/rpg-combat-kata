@@ -5,13 +5,11 @@
 
 static void setLevel(rpg::Character &character, int const level)
 {
-  struct CharacterData final
-  {
-    rpg::Health health;
-    int level;
-    bool alive;
-  };
-  reinterpret_cast<CharacterData &>(character).level = level;
+  int const currentLevel = character.level();
+  if (level > currentLevel) {
+    for (int n = level - currentLevel; n--;)
+      character.levelUp();
+  }
 }
 
 static int constexpr LEVEL_THRESHOLD = 5;
