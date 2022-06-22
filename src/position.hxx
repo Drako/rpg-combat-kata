@@ -4,6 +4,8 @@
 
 namespace rpg
 {
+
+
 struct Position final
 {
   float x{0.f};

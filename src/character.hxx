@@ -31,19 +31,19 @@ public:
   Character(Character const &) noexcept = default;
   Character &operator=(Character const &) noexcept = default;
 
-  [[nodiscard]] Health health() const noexcept;
+  Health health() const noexcept;
 
-  [[nodiscard]] int level() const noexcept;
+  int level() const noexcept;
 
-  [[nodiscard]] bool alive() const noexcept;
+  bool alive() const noexcept;
 
-  [[nodiscard]] CharacterType type() const noexcept;
+  CharacterType type() const noexcept;
 
-  [[nodiscard]] float range() const noexcept;
+  float range() const noexcept;
 
-  [[nodiscard]] Position position() const noexcept;
+  Position position() const noexcept;
 
-  [[nodiscard]] std::unordered_set<std::string> const &factions() const noexcept;
+  std::unordered_set<std::string> const &factions() const noexcept;
 
   void takeDamage(int damage);
 
