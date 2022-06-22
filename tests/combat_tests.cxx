@@ -63,3 +63,46 @@ TEST(CombatTests, charactersTake50PercentLessDamageFromWeakEnemies)
   rpg::Combat::attack(weak, strong, 10);
   EXPECT_EQ(oldHealth - 5, strong.health());
 }
+
+struct CombatRangeTestParams final
+{
+  rpg::CharacterType attackerType;
+  rpg::Position targetPosition;
+  bool shouldHit;
+};
+
+std::ostream &operator<<(std::ostream &os, CombatRangeTestParams const &params) noexcept
+{
+  return os << "{ attackerType: " << params.attackerType
+            << ", targetPosition: " << params.targetPosition
+            << ", shouldHit: " << std::boolalpha << params.shouldHit << " }";
+}
+
+struct CombatRangeTests: testing::TestWithParam<CombatRangeTestParams>
+{
+};
+
+TEST_P(CombatRangeTests, attackersCanOnlyHitTargetsInRange)
+{
+  auto const params = GetParam();
+  rpg::Character const attacker{params.attackerType};
+  rpg::Character target{params.targetPosition};
+  int const oldHealth = target.health();
+  rpg::Combat::attack(attacker, target, 42);
+  bool const hit = (oldHealth > target.health());
+
+  EXPECT_EQ(params.shouldHit, hit);
+}
+
+INSTANTIATE_TEST_SUITE_P(Range, CombatRangeTests, testing::Values(
+  CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 0.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 0.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Melee, {3.f, 0.f}, false},
+  CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 1.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 2.f}, false},
+  CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 0.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 0.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Ranged, {30.f, 0.f}, false},
+  CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 10.f}, true},
+  CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 20.f}, false}
+));

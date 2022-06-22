@@ -3,7 +3,7 @@ cmake_policy(VERSION 3.20)
 project(rpg_combat_kata)
 
 set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED  ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(rpgCombatKata STATIC
