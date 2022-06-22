@@ -33,6 +33,20 @@ TEST(CombatTests, charactersCannotAttackThemselves)
   EXPECT_EQ(oldHealth, bob.health());
 }
 
+TEST(CombatTests, charactersCannotHealOtherCharacters)
+{
+  rpg::Character adrian{};
+  adrian.join("Team Aqua");
+
+  rpg::Character marc{};
+  marc.join("Team Magma");
+
+  int const oldHealth = marc.health();
+  marc.takeDamage(250);
+  rpg::Combat::heal(adrian, marc, 100);
+  EXPECT_EQ(oldHealth - 250, marc.health());
+}
+
 TEST(CombatTests, charactersCanHealThemselves)
 {
   rpg::Character heinz{};
