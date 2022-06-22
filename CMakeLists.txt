@@ -6,11 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(rpgCombatKata STATIC
-    src/health.hxx src/health.cxx
-    )
-target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
-
 include(FetchContent)
 FetchContent_Declare(
     GoogleTest
@@ -18,7 +13,19 @@ FetchContent_Declare(
     GIT_TAG e2239ee6043f73722e7aa812a459f54a28552929
     # release-1.11.0
 )
-FetchContent_MakeAvailable(GoogleTest)
+FetchContent_Declare(
+    GSL
+    GIT_REPOSITORY https://github.com/Microsoft/GSL.git
+    GIT_TAG a3534567187d2edc428efd3f13466ff75fe5805c
+    # v4.0.0
+)
+FetchContent_MakeAvailable(GoogleTest GSL)
+
+add_library(rpgCombatKata STATIC
+    src/health.hxx src/health.cxx
+    )
+target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
+target_link_libraries(rpgCombatKata PUBLIC Microsoft.GSL::GSL)
 
 enable_testing()
 
