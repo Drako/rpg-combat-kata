@@ -41,8 +41,8 @@ void Combat::attack(const rpg::Character &attacker, rpg::Character &target, int 
 
 void Combat::heal(Character const &healer, rpg::Character &target, int const restoration)
 {
-  (void) healer;
-  target.restore(restoration);
+  if (std::addressof(healer) == std::addressof(target))
+    target.restore(restoration);
 }
 
 bool Combat::areAllies(Character const &a, Character const &b) noexcept
