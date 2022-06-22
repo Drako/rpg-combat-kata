@@ -34,4 +34,14 @@ void Character::levelUp() noexcept
 {
   ++_level;
 }
+
+CharacterType Character::type() const noexcept
+{
+  return CharacterType::Melee;
+}
+
+float Character::range() const noexcept
+{
+  return 2.f;
+}
 }

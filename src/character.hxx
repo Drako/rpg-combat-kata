@@ -4,6 +4,10 @@
 
 namespace rpg
 {
+enum class CharacterType {
+  Melee,
+};
+
 class Character final
 {
 public:
@@ -12,6 +16,10 @@ public:
   [[nodiscard]] int level() const noexcept;
 
   [[nodiscard]] bool alive() const noexcept;
+
+  [[nodiscard]] CharacterType type() const noexcept;
+
+  [[nodiscard]] float range() const noexcept;
 
   void takeDamage(int damage);
 

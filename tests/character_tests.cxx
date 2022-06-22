@@ -52,6 +52,6 @@ TEST_F(CharacterTests, deadCharactersCannotBeHealed)
 
 TEST_F(CharacterTests, charactersAreMeleeByDefault)
 {
-  EXPECT_EQ(CharacterType::Melee, character.type());
+  EXPECT_EQ(rpg::CharacterType::Melee, character.type());
   EXPECT_FLOAT_EQ(2.f, character.range());
 }
