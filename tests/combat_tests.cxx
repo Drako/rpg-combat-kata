@@ -116,3 +116,14 @@ TEST(CombatTests, charactersWithNoCommonFactionsAreNoAllies)
 
   EXPECT_FALSE(rpg::Combat::areAllies(jessy, ash));
 }
+
+TEST(CombatTests, charactersWithCommonFactionsAreAllies)
+{
+  rpg::Character tony{};
+  tony.join("Avengers");
+
+  rpg::Character steve{};
+  steve.join("Avengers");
+
+  EXPECT_TRUE(rpg::Combat::areAllies(tony, steve));
+}
