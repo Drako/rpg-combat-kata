@@ -55,3 +55,14 @@ TEST_F(CharacterTests, charactersAreMeleeByDefault)
   EXPECT_EQ(rpg::CharacterType::Melee, character.type());
   EXPECT_FLOAT_EQ(2.f, character.range());
 }
+
+TEST_F(CharacterTests, charactersCanBeCreatedWithExplicitType)
+{
+  rpg::Character fighter{rpg::CharacterType::Melee};
+  EXPECT_EQ(rpg::CharacterType::Melee, fighter.type());
+  EXPECT_FLOAT_EQ(2.f, fighter.range());
+
+  rpg::Character ranger{rpg::CharacterType::Ranged};
+  EXPECT_EQ(rpg::CharacterType::Ranged, ranger.type());
+  EXPECT_FLOAT_EQ(20.f, ranger.range());
+}
