@@ -42,11 +42,17 @@ void Character::levelUp() noexcept
 
 CharacterType Character::type() const noexcept
 {
-  return CharacterType::Melee;
+  return _type;
 }
 
 float Character::range() const noexcept
 {
-  return 2.f;
+  switch (_type) {
+  default:
+  case CharacterType::Melee:
+    return MELEE_RANGE;
+  case CharacterType::Ranged:
+    return RANGED_RANGE;
+  }
 }
 }

@@ -12,6 +12,9 @@ enum class CharacterType
 
 class Character final
 {
+  static float constexpr MELEE_RANGE = 2.f;
+  static float constexpr RANGED_RANGE = 20.f;
+
 public:
   explicit Character(CharacterType type = CharacterType::Melee) noexcept;
 
