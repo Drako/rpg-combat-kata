@@ -23,13 +23,13 @@ FetchContent_MakeAvailable(GoogleTest GSL)
 
 add_library(rpgCombatKata STATIC
     src/health.hxx src/health.cxx
-    )
+     src/character.hxx src/character.cxx)
 target_include_directories(rpgCombatKata PUBLIC "${CMAKE_CURRENT_LIST_DIR}/src")
 target_link_libraries(rpgCombatKata PUBLIC Microsoft.GSL::GSL)
 
 enable_testing()
 
 add_executable(rpgCombatKataTests
-    tests/health_tests.cxx)
+    tests/health_tests.cxx tests/character_tests.cxx)
 target_link_libraries(rpgCombatKataTests PRIVATE rpgCombatKata gtest gmock gmock_main)
 add_test(NAME rpgCombatKataTests COMMAND rpgCombatKataTests)
