@@ -45,7 +45,7 @@ namespace rpg {
 
     std::unordered_set<std::string> const& factions() const noexcept;
 
-    void takeDamage(int damage);
+    void takeDamage(int damage) override;
 
     void restore(int restoration);
 

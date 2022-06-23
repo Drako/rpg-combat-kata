@@ -155,7 +155,12 @@ TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
 
 TEST_F(CharacterTests, charactersAreDamageable)
 {
-  rpg::Character const bob{};
-  rpg::Damageable const& damageable = bob;
-  EXPECT_EQ(bob.health(), damageable.health());
+  rpg::Character bob{};
+  rpg::Damageable& damageable = bob;
+
+  auto const oldHealth = damageable.health();
+  EXPECT_EQ(bob.health(), oldHealth);
+
+  damageable.takeDamage(42);
+  EXPECT_EQ(oldHealth-42, damageable.health());
 }
