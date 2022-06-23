@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cxx_17_traits.hxx"
+#include "damageable.hxx"
 #include "health.hxx"
 #include "position.hxx"
 
@@ -17,7 +18,7 @@ namespace rpg {
 
   std::ostream& operator<<(std::ostream& os, CharacterType type) noexcept;
 
-  class Character final {
+  class Character final : public Damageable {
     static float constexpr MELEE_RANGE = 2.f;
     static float constexpr RANGED_RANGE = 20.f;
 
