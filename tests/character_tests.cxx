@@ -155,6 +155,7 @@ TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
 
 TEST_F(CharacterTests, charactersAreDamageable)
 {
-  EXPECT_TRUE(std::is_polymorphic<rpg::Character>::value);
-  EXPECT_TRUE((std::is_base_of<rpg::Damageable, rpg::Character>::value));
+  rpg::Character const bob{};
+  rpg::Damageable const& damageable = bob;
+  EXPECT_EQ(bob.health(), damageable.health());
 }

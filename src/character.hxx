@@ -31,7 +31,7 @@ namespace rpg {
 
     Character& operator=(Character const&) noexcept = default;
 
-    Health health() const noexcept;
+    Health health() const noexcept override;
 
     int level() const noexcept;
 
