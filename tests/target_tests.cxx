@@ -17,3 +17,8 @@ TEST(TargetTests, targetsMayBeInFactions)
   EXPECT_TRUE(
       (std::is_same<decltype(std::declval<rpg::Target&>().factions()), std::unordered_set<std::string> const&>::value));
 }
+
+TEST(TargetTests, targetsHaveAPosition)
+{
+  EXPECT_TRUE((std::is_same<decltype(std::declval<rpg::Target&>().position()), rpg::Position>::value));
+}

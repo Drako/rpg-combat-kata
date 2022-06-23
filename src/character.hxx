@@ -38,7 +38,7 @@ namespace rpg {
 
     float range() const noexcept;
 
-    Position position() const noexcept;
+    Position position() const noexcept override;
 
     std::unordered_set<std::string> const& factions() const noexcept override;
 
