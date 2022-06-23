@@ -5,5 +5,5 @@
 
 TEST(DamageableTests, damageableThingsHaveHealth)
 {
-  EXPECT_TRUE((std::is_same<decltype(rpg::Damageable::health()), rpg::Health>));
+  EXPECT_TRUE((std::is_same<decltype(std::declval<rpg::Damageable&>().health()), rpg::Health>::value));
 }
