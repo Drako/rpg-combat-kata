@@ -3,11 +3,11 @@
 #include "character.hxx"
 #include "combat.hxx"
 
-static void setLevel(rpg::Character &character, int const level)
+static void setLevel(rpg::Character& character, int const level)
 {
   int const currentLevel = character.level();
-  if (level > currentLevel) {
-    for (int n = level - currentLevel; n--;)
+  if (level>currentLevel) {
+    for (int n = level-currentLevel; n--;)
       character.levelUp();
   }
 }
@@ -21,8 +21,8 @@ TEST(CombatTests, charactersCanAttackEachOther)
   rpg::Character bert{};
   rpg::Combat::attack(ernie, bert, 42);
   rpg::Combat::attack(bert, ernie, 23);
-  EXPECT_EQ(fullHealth - 42, bert.health());
-  EXPECT_EQ(fullHealth - 23, ernie.health());
+  EXPECT_EQ(fullHealth-42, bert.health());
+  EXPECT_EQ(fullHealth-23, ernie.health());
 }
 
 TEST(CombatTests, charactersCannotAttackThemselves)
@@ -44,7 +44,7 @@ TEST(CombatTests, charactersCannotHealOtherCharacters)
   int const oldHealth = marc.health();
   marc.takeDamage(250);
   rpg::Combat::heal(adrian, marc, 100);
-  EXPECT_EQ(oldHealth - 250, marc.health());
+  EXPECT_EQ(oldHealth-250, marc.health());
 }
 
 TEST(CombatTests, charactersCanHealThemselves)
@@ -53,7 +53,7 @@ TEST(CombatTests, charactersCanHealThemselves)
   int const oldHealth = heinz.health();
   heinz.takeDamage(250);
   rpg::Combat::heal(heinz, heinz, 100);
-  EXPECT_EQ(oldHealth - 150, heinz.health());
+  EXPECT_EQ(oldHealth-150, heinz.health());
 }
 
 TEST(CombatTests, charactersCanHealAllies)
@@ -67,47 +67,45 @@ TEST(CombatTests, charactersCanHealAllies)
   int const oldHealth = james.health();
   james.takeDamage(250);
   rpg::Combat::heal(jessy, james, 100);
-  EXPECT_EQ(oldHealth - 150, james.health());
+  EXPECT_EQ(oldHealth-150, james.health());
 }
 
 TEST(CombatTests, charactersTake50PercentMoreDamageFromStrongEnemies)
 {
   rpg::Character strong{};
-  ::setLevel(strong, 1 + LEVEL_THRESHOLD);
+  ::setLevel(strong, 1+LEVEL_THRESHOLD);
   rpg::Character weak{};
   int const oldHealth = weak.health();
 
   rpg::Combat::attack(strong, weak, 10);
-  EXPECT_EQ(oldHealth - 15, weak.health());
+  EXPECT_EQ(oldHealth-15, weak.health());
 }
 
 TEST(CombatTests, charactersTake50PercentLessDamageFromWeakEnemies)
 {
   rpg::Character weak{};
   rpg::Character strong{};
-  ::setLevel(strong, 1 + LEVEL_THRESHOLD);
+  ::setLevel(strong, 1+LEVEL_THRESHOLD);
   int const oldHealth = strong.health();
 
   rpg::Combat::attack(weak, strong, 10);
-  EXPECT_EQ(oldHealth - 5, strong.health());
+  EXPECT_EQ(oldHealth-5, strong.health());
 }
 
-struct CombatRangeTestParams final
-{
+struct CombatRangeTestParams final {
   rpg::CharacterType attackerType;
   rpg::Position targetPosition;
   bool shouldHit;
 };
 
-std::ostream &operator<<(std::ostream &os, CombatRangeTestParams const &params) noexcept
+std::ostream& operator<<(std::ostream& os, CombatRangeTestParams const& params) noexcept
 {
   return os << "{ attackerType: " << params.attackerType
             << ", targetPosition: " << params.targetPosition
             << ", shouldHit: " << std::boolalpha << params.shouldHit << " }";
 }
 
-struct CombatRangeTests: testing::TestWithParam<CombatRangeTestParams>
-{
+struct CombatRangeTests : testing::TestWithParam<CombatRangeTestParams> {
 };
 
 TEST_P(CombatRangeTests, attackersCanOnlyHitTargetsInRange)
@@ -117,22 +115,22 @@ TEST_P(CombatRangeTests, attackersCanOnlyHitTargetsInRange)
   rpg::Character target{params.targetPosition};
   int const oldHealth = target.health();
   rpg::Combat::attack(attacker, target, 42);
-  bool const hit = (oldHealth > target.health());
+  bool const hit = (oldHealth>target.health());
 
   EXPECT_EQ(params.shouldHit, hit);
 }
 
 INSTANTIATE_TEST_SUITE_P(Range, CombatRangeTests, testing::Values(
-  CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 0.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 0.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Melee, {3.f, 0.f}, false},
-  CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 1.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 2.f}, false},
-  CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 0.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 0.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Ranged, {30.f, 0.f}, false},
-  CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 10.f}, true},
-  CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 20.f}, false}
+    CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 0.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 0.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Melee, {3.f, 0.f}, false},
+    CombatRangeTestParams{rpg::CharacterType::Melee, {1.f, 1.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Melee, {2.f, 2.f}, false},
+    CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 0.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 0.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Ranged, {30.f, 0.f}, false},
+    CombatRangeTestParams{rpg::CharacterType::Ranged, {10.f, 10.f}, true},
+    CombatRangeTestParams{rpg::CharacterType::Ranged, {20.f, 20.f}, false}
 ));
 
 TEST(CombatTests, charactersWithNoCommonFactionsAreNoAllies)

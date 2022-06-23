@@ -1,19 +1,17 @@
 #pragma once
 
-namespace rpg
-{
-class Health final
-{
-  static int constexpr FULL_HEALTH = 1000;
+namespace rpg {
+  class Health final {
+    static int constexpr FULL_HEALTH = 1000;
 
-public:
-  Health &operator-=(int damage);
+  public:
+    Health& operator-=(int damage);
 
-  Health &operator+=(int restoration);
+    Health& operator+=(int restoration);
 
-  operator int() const noexcept;
+    operator int() const noexcept;
 
-private:
-  int value{FULL_HEALTH};
-};
+  private:
+    int value{FULL_HEALTH};
+  };
 }

@@ -6,13 +6,12 @@
 #include <sstream>
 #include <type_traits>
 
-struct CharacterTypeOutputParams final
-{
+struct CharacterTypeOutputParams final {
   rpg::CharacterType type;
   std::string expected;
 };
 
-std::ostream &operator<<(std::ostream &os, CharacterTypeOutputParams const &params)
+std::ostream& operator<<(std::ostream& os, CharacterTypeOutputParams const& params)
 {
   return os << "{ type: " << static_cast<std::underlying_type_t<rpg::CharacterType>>(params.type) << ", expected: \""
             << params.expected << "\"}";
@@ -29,16 +28,15 @@ TEST_P(CharacterTypeTests, streamingOperatorShouldYieldExpectedOutput)
 }
 
 INSTANTIATE_TEST_SUITE_P(Output, CharacterTypeTests, testing::Values(
-  CharacterTypeOutputParams{rpg::CharacterType::Melee, "CharacterType::Melee"},
-  CharacterTypeOutputParams{rpg::CharacterType::Ranged, "CharacterType::Ranged"},
-  CharacterTypeOutputParams{static_cast<rpg::CharacterType>(42), "CharacterType::[Invalid]"}
+    CharacterTypeOutputParams{rpg::CharacterType::Melee, "CharacterType::Melee"},
+    CharacterTypeOutputParams{rpg::CharacterType::Ranged, "CharacterType::Ranged"},
+    CharacterTypeOutputParams{static_cast<rpg::CharacterType>(42), "CharacterType::[Invalid]"}
 ));
 
-struct CharacterTests: testing::Test
-{
+struct CharacterTests : testing::Test {
   rpg::Character character{};
 
-  static void kill(rpg::Character &c)
+  static void kill(rpg::Character& c)
   {
     c.takeDamage(c.health());
   }
@@ -56,7 +54,7 @@ TEST_F(CharacterTests, charactersCanTakeDamage)
 {
   int const oldHealth = character.health();
   character.takeDamage(42);
-  EXPECT_EQ(oldHealth - 42, character.health());
+  EXPECT_EQ(oldHealth-42, character.health());
 }
 
 TEST_F(CharacterTests, characterDiesIfTakingTooMuchDamage)
@@ -70,7 +68,7 @@ TEST_F(CharacterTests, charactersCanBeHealed)
   int const oldHealth = character.health();
   character.takeDamage(42);
   character.restore(23);
-  EXPECT_EQ(oldHealth - 19, character.health());
+  EXPECT_EQ(oldHealth-19, character.health());
 }
 
 TEST_F(CharacterTests, deadCharactersCannotBeHealed)
@@ -105,8 +103,7 @@ TEST_F(CharacterTests, charactersStartAtCenterOfWorldByDefault)
   EXPECT_FLOAT_EQ(0.f, position.y);
 }
 
-struct CharacterStartingPositionTests: CharacterTests, testing::WithParamInterface<rpg::Position>
-{
+struct CharacterStartingPositionTests : CharacterTests, testing::WithParamInterface<rpg::Position> {
 };
 
 TEST_P(CharacterStartingPositionTests, charactersCanStartAtDifferentPosition)
@@ -119,10 +116,10 @@ TEST_P(CharacterStartingPositionTests, charactersCanStartAtDifferentPosition)
 }
 
 INSTANTIATE_TEST_SUITE_P(StartingPosition, CharacterStartingPositionTests, testing::Values(
-  rpg::Position{1.f, 0.f},
-  rpg::Position{-1.f, 0.f},
-  rpg::Position{0.f, 1.f},
-  rpg::Position{0.f, -1.f}
+    rpg::Position{1.f, 0.f},
+    rpg::Position{-1.f, 0.f},
+    rpg::Position{0.f, 1.f},
+    rpg::Position{0.f, -1.f}
 ));
 
 TEST_F(CharacterTests, charactersShouldBeAbleToMove)

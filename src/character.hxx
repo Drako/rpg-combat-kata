@@ -9,74 +9,73 @@
 #include <unordered_set>
 #include <utility>
 
-namespace rpg
-{
-enum class CharacterType
-{
-  Melee,
-  Ranged,
-};
+namespace rpg {
+  enum class CharacterType {
+    Melee,
+    Ranged,
+  };
 
-std::ostream &operator<<(std::ostream &os, CharacterType type) noexcept;
+  std::ostream& operator<<(std::ostream& os, CharacterType type) noexcept;
 
-class Character final
-{
-  static float constexpr MELEE_RANGE = 2.f;
-  static float constexpr RANGED_RANGE = 20.f;
+  class Character final {
+    static float constexpr MELEE_RANGE = 2.f;
+    static float constexpr RANGED_RANGE = 20.f;
 
-public:
-  explicit Character(CharacterType type = CharacterType::Melee) noexcept;
-  explicit Character(Position const &position, CharacterType type = CharacterType::Melee) noexcept;
+  public:
+    explicit Character(CharacterType type = CharacterType::Melee) noexcept;
 
-  Character(Character const &) noexcept = default;
-  Character &operator=(Character const &) noexcept = default;
+    explicit Character(Position const& position, CharacterType type = CharacterType::Melee) noexcept;
 
-  Health health() const noexcept;
+    Character(Character const&) noexcept = default;
 
-  int level() const noexcept;
+    Character& operator=(Character const&) noexcept = default;
 
-  bool alive() const noexcept;
+    Health health() const noexcept;
 
-  CharacterType type() const noexcept;
+    int level() const noexcept;
 
-  float range() const noexcept;
+    bool alive() const noexcept;
 
-  Position position() const noexcept;
+    CharacterType type() const noexcept;
 
-  std::unordered_set<std::string> const &factions() const noexcept;
+    float range() const noexcept;
 
-  void takeDamage(int damage);
+    Position position() const noexcept;
 
-  void restore(int restoration);
+    std::unordered_set<std::string> const& factions() const noexcept;
 
-  void levelUp() noexcept;
+    void takeDamage(int damage);
 
-  void moveTo(Position const &newPosition) noexcept;
+    void restore(int restoration);
 
-  template<typename... StringTypes>
-  auto join(StringTypes &&... factions)
-  -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
-  {
-    auto const f = {std::string{std::forward<StringTypes>(factions)}...};
-    for (auto const &faction: f)
-      _factions.insert(faction);
-  }
+    void levelUp() noexcept;
 
-  template<typename... StringTypes>
-  auto leave(StringTypes &&... factions)
-  -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
-  {
-    auto const f = {std::string{std::forward<StringTypes>(factions)}...};
-    for (auto const &faction: f)
-      _factions.erase(faction);
-  }
+    void moveTo(Position const& newPosition) noexcept;
 
-private:
-  Health _health{};
-  int _level{1};
-  bool _alive{true};
-  CharacterType _type;
-  Position _position;
-  std::unordered_set<std::string> _factions{};
-};
+    template<typename... StringTypes>
+    auto join(StringTypes&& ... factions)
+    -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
+    {
+      auto const f = {std::string{std::forward<StringTypes>(factions)}...};
+      for (auto const& faction: f)
+        _factions.insert(faction);
+    }
+
+    template<typename... StringTypes>
+    auto leave(StringTypes&& ... factions)
+    -> std::enable_if_t<conjunction_v<std::is_convertible<StringTypes, std::string>::value...>>
+    {
+      auto const f = {std::string{std::forward<StringTypes>(factions)}...};
+      for (auto const& faction: f)
+        _factions.erase(faction);
+    }
+
+  private:
+    Health _health{};
+    int _level{1};
+    bool _alive{true};
+    CharacterType _type;
+    Position _position;
+    std::unordered_set<std::string> _factions{};
+  };
 }

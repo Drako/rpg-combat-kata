@@ -2,18 +2,14 @@
 
 #include <ostream>
 
-namespace rpg
-{
+namespace rpg {
+  struct Position final {
+    float x{0.f};
+    float y{0.f};
+  };
 
-
-struct Position final
-{
-  float x{0.f};
-  float y{0.f};
-};
-
-inline std::ostream &operator<<(std::ostream &os, Position const &pos) noexcept
-{
-  return os << "{ x: " << pos.x << ", y: " << pos.y << " }";
-}
+  inline std::ostream& operator<<(std::ostream& os, Position const& pos) noexcept
+  {
+    return os << "{ x: " << pos.x << ", y: " << pos.y << " }";
+  }
 }
