@@ -1,12 +1,10 @@
 #pragma once
 
 #include "cxx_17_traits.hxx"
-#include "damageable.hxx"
+#include "target.hxx"
 #include "position.hxx"
 
 #include <ostream>
-#include <string>
-#include <unordered_set>
 #include <utility>
 
 namespace rpg {
@@ -17,7 +15,7 @@ namespace rpg {
 
   std::ostream& operator<<(std::ostream& os, CharacterType type) noexcept;
 
-  class Character final : public Damageable {
+  class Character final : public Target {
     static float constexpr MELEE_RANGE = 2.f;
     static float constexpr RANGED_RANGE = 20.f;
 

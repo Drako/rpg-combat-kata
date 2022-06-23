@@ -153,18 +153,18 @@ TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
   EXPECT_TRUE(character.factions().empty());
 }
 
-TEST_F(CharacterTests, charactersAreDamageable)
+TEST_F(CharacterTests, charactersAreTargets)
 {
   rpg::Character bob{};
   bob.join("Network");
 
-  rpg::Damageable& damageable = bob;
+  rpg::Target& target = bob;
 
-  auto const oldHealth = damageable.health();
+  auto const oldHealth = target.health();
   EXPECT_EQ(bob.health(), oldHealth);
 
-  damageable.takeDamage(42);
-  EXPECT_EQ(oldHealth-42, damageable.health());
+  target.takeDamage(42);
+  EXPECT_EQ(oldHealth-42, target.health());
 
-  EXPECT_EQ(bob.factions(), damageable.factions());
+  EXPECT_EQ(bob.factions(), target.factions());
 }

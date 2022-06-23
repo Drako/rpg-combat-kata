@@ -6,8 +6,8 @@
 #include <string>
 
 namespace rpg {
-  struct Damageable {
-    virtual ~Damageable() noexcept = default;
+  struct Target {
+    virtual ~Target() noexcept = default;
 
     virtual Health health() const = 0;
 
