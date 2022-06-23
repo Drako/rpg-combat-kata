@@ -2,7 +2,6 @@
 
 #include "cxx_17_traits.hxx"
 #include "damageable.hxx"
-#include "health.hxx"
 #include "position.hxx"
 
 #include <ostream>
@@ -43,7 +42,7 @@ namespace rpg {
 
     Position position() const noexcept;
 
-    std::unordered_set<std::string> const& factions() const noexcept;
+    std::unordered_set<std::string> const& factions() const noexcept override;
 
     void takeDamage(int damage) override;
 

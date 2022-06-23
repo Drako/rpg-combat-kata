@@ -156,6 +156,8 @@ TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
 TEST_F(CharacterTests, charactersAreDamageable)
 {
   rpg::Character bob{};
+  bob.join("Network");
+
   rpg::Damageable& damageable = bob;
 
   auto const oldHealth = damageable.health();
@@ -163,4 +165,6 @@ TEST_F(CharacterTests, charactersAreDamageable)
 
   damageable.takeDamage(42);
   EXPECT_EQ(oldHealth-42, damageable.health());
+
+  EXPECT_EQ(bob.factions(), damageable.factions());
 }
