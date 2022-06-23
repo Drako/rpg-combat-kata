@@ -152,3 +152,9 @@ TEST_F(CharacterTests, charactersMayJoinOrLeaveMultipleFactions)
   character.leave("Mystery Inc.");
   EXPECT_TRUE(character.factions().empty());
 }
+
+TEST_F(CharacterTests, charactersAreDamageable)
+{
+  EXPECT_TRUE(std::is_polymorphic<rpg::Character>::value);
+  EXPECT_TRUE((std::is_base_of<rpg::Damageable, rpg::Character>::value));
+}
