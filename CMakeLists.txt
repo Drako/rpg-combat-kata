@@ -10,6 +10,7 @@ add_library(rpgCombatKata STATIC
     src/character.hxx src/character.cxx
     src/combat.hxx src/combat.cxx
     src/health.hxx src/health.cxx
+    src/prop.hxx src/prop.cxx
     src/position.hxx
     src/cxx_17_traits.hxx
     src/target.hxx
@@ -31,6 +32,7 @@ add_executable(rpgCombatKataTests
     tests/character_tests.cxx
     tests/combat_tests.cxx
     tests/target_tests.cxx
-    tests/health_tests.cxx)
+    tests/health_tests.cxx
+    tests/prop_tests.cxx)
 target_link_libraries(rpgCombatKataTests PRIVATE rpgCombatKata gtest gmock gmock_main)
 add_test(NAME rpgCombatKataTests COMMAND rpgCombatKataTests)

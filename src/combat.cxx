@@ -1,4 +1,5 @@
 #include "combat.hxx"
+#include "target.hxx"
 #include "character.hxx"
 
 #include <algorithm>
@@ -9,7 +10,7 @@
 static int constexpr LEVEL_THRESHOLD = 5;
 
 namespace {
-  float distanceBetween(rpg::Character const& a, rpg::Character const& b) noexcept
+  float distanceBetween(rpg::Target const& a, rpg::Target const& b) noexcept
   {
     auto const posA = a.position();
     auto const posB = b.position();
@@ -20,14 +21,20 @@ namespace {
 }
 
 namespace rpg {
-  void Combat::attack(const rpg::Character& attacker, rpg::Character& target, int const damage)
+  void Combat::attack(const rpg::Character& attacker, rpg::Target& target, int const damage)
   {
     bool const attackingSelf = std::addressof(target)==std::addressof(attacker);
 
     if (attackingSelf || ::distanceBetween(attacker, target)>attacker.range())
       return;
 
-    int const levelDifference = attacker.level()-target.level();
+    auto const attackedCharacter = dynamic_cast<rpg::Character*>(std::addressof(target));
+    if (attackedCharacter==nullptr) {
+      target.takeDamage(damage);
+      return;
+    }
+
+    int const levelDifference = attacker.level()-attackedCharacter->level();
     if (levelDifference>=LEVEL_THRESHOLD)
       target.takeDamage(damage+(damage >> 1U));
     else if (levelDifference<=-LEVEL_THRESHOLD)
@@ -44,7 +51,7 @@ namespace rpg {
       target.restore(restoration);
   }
 
-  bool Combat::areAllies(Character const& a, Character const& b) noexcept
+  bool Combat::areAllies(Target const& a, Target const& b) noexcept
   {
     auto const& aFactions = a.factions();
     auto const& bFactions = b.factions();

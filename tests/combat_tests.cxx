@@ -2,6 +2,7 @@
 
 #include "character.hxx"
 #include "combat.hxx"
+#include "prop.hxx"
 
 static void setLevel(rpg::Character& character, int const level)
 {
@@ -152,4 +153,12 @@ TEST(CombatTests, charactersWithCommonFactionsAreAllies)
   steve.join("Avengers");
 
   EXPECT_TRUE(rpg::Combat::areAllies(tony, steve));
+}
+
+TEST(CombatTests, propsCanBeAttacked)
+{
+  rpg::Character const steve{};
+  rpg::Prop tree{2000};
+  rpg::Combat::attack(steve, tree, 250);
+  EXPECT_EQ(1750, tree.health());
 }

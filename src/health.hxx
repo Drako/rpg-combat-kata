@@ -2,9 +2,15 @@
 
 namespace rpg {
   class Health final {
-    static int constexpr FULL_HEALTH = 1000;
+    static int constexpr DEFAULT_FULL_HEALTH = 1000;
 
   public:
+    explicit Health(int fullHealth = DEFAULT_FULL_HEALTH);
+
+    Health(Health const&) noexcept = default;
+
+    Health& operator=(Health const&) noexcept = default;
+
     Health& operator-=(int damage);
 
     Health& operator+=(int restoration);
@@ -12,6 +18,7 @@ namespace rpg {
     operator int() const noexcept;
 
   private:
-    int value{FULL_HEALTH};
+    int _fullHealth;
+    int _value;
   };
 }

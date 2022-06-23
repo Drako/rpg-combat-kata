@@ -55,3 +55,30 @@ TEST_F(HealthTests, healthCannotBeRaisedOver1000)
   health += 10;
   EXPECT_EQ(FULL_HEALTH, health);
 }
+
+TEST_F(HealthTests, thereCanBeAnAlternativeMaximumHealth)
+{
+  rpg::Health customHealth{2000};
+
+  customHealth -= 200;
+  EXPECT_EQ(1800, customHealth);
+
+  customHealth += 100;
+  EXPECT_EQ(1900, customHealth);
+
+  customHealth += 200;
+  EXPECT_EQ(2000, customHealth);
+}
+
+TEST_F(HealthTests, customHealthMaximumsMustBeGreaterThanZero)
+{
+  auto const constructZeroHealth = [this] {
+    rpg::Health h{0};
+  };
+  EXPECT_THROW(constructZeroHealth(), std::invalid_argument);
+
+  auto const constructNegativeHealth = [this] {
+    rpg::Health h{-10};
+  };
+  EXPECT_THROW(constructNegativeHealth(), std::invalid_argument);
+}
